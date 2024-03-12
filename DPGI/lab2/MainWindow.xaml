@@ -5,10 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Canvas Background="Aquamarine">
-        <Label Content="Label"  Canvas.Left="20"/>
-        <TextBox  Text="TextBox" Canvas.Top="20" Canvas.Left="40"/>
-        <Button  Content="Button" Canvas.Top="40" Canvas.Left="60"/>
-    </Canvas>
+        Title="TextEditor " Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="#FFCBBEBE" BorderThickness="2" CornerRadius="10">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Button>
+                    <Image Source="images/Open.png" Width="85" Height="85"/>
+                    <Button.ToolTip>
+                        <ToolTip>Open</ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button>
+                    <Image Source="images/Clear.png" Width="85" Height="85"/>
+                    <Button.ToolTip>
+                        <ToolTip>Clear</ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button>
+                    <Image Source="images/Copy.png" Width="85" Height="85"/>
+                    <Button.ToolTip>
+                        <ToolTip>Copy</ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button>
+                    <Image Source="images/Paste.png" Width="85" Height="85"/>
+                    <Button.ToolTip>
+                        <ToolTip>Paste</ToolTip>
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Margin="15"/>
+            <DockPanel Grid.Row="1" Margin="15">
+                <Button Content="OK" DockPanel.Dock="Bottom" Width="20"/>
+            </DockPanel>
+        </Grid>
+
+    </Grid>
 </Window>
