@@ -28,26 +28,26 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" BorderBrush="#FFCBBEBE" BorderThickness="2" CornerRadius="10" Background="{StaticResource LinearPanelBrush}">
-            <StackPanel Orientation="Horizontal" Margin="5" >
-                <Button>
+            <StackPanel Orientation="Horizontal" Margin="5" FocusManager.IsFocusScope="True" >
+                <Button Command="Open">
                     <Image Source="images/Open.png" Width="85" Height="85"/>
                     <Button.ToolTip>
                         <ToolTip>Open</ToolTip>
                     </Button.ToolTip>
                 </Button>
-                <Button>
+                <Button Command="Cut">
                     <Image Source="images/Clear.png" Width="85" Height="85"/>
                     <Button.ToolTip>
                         <ToolTip>Clear</ToolTip>
                     </Button.ToolTip>
                 </Button>
-                <Button>
+                <Button Command="Copy">
                     <Image Source="images/Copy.png" Width="85" Height="85"/>
                     <Button.ToolTip>
                         <ToolTip>Copy</ToolTip>
                     </Button.ToolTip>
                 </Button>
-                <Button>
+                <Button Command="Paste">
                     <Image Source="images/Paste.png" Width="85" Height="85"/>
                     <Button.ToolTip>
                         <ToolTip>Paste</ToolTip>
@@ -61,10 +61,14 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBox Grid.Row="0" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Margin="15"/>
+                <TextBox x:Name="inputTextBox" Grid.Row="0"  FontSize="{Binding ElementName=fontSlider, Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Margin="15"/>
                 <DockPanel Grid.Row="1" Margin="15">
-                    <Button Content="OK" DockPanel.Dock="Bottom" Width="20" Style="{StaticResource ButtonStyle}"/>
+                    <Label Content="Розмір шрифту:" DockPanel.Dock="Left" />
+                    <Slider Margin="4" MinWidth="100" Name="fontSlider" Maximum="100"  Minimum="12"></Slider>
+                    <Button Command="Save"  Content="OK" DockPanel.Dock="Bottom" Width="20" Style="{StaticResource ButtonStyle}"/>
                 </DockPanel>
+
+              
             </Grid>
         </Border>
     </Grid>
