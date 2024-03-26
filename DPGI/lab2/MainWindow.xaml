@@ -61,7 +61,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBox x:Name="inputTextBox" Grid.Row="0"  FontSize="{Binding ElementName=fontSlider, Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" Margin="15"/>
+                <TextBox x:Name="inputTextBox" Grid.Row="0"  FontSize="{Binding ElementName=fontSlider, Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Margin="15"/>
                 <DockPanel Grid.Row="1" Margin="15">
                     <Label Content="Розмір шрифту:" DockPanel.Dock="Left" />
                     <Slider Margin="4" MinWidth="100" Name="fontSlider" Maximum="100"  Minimum="12"></Slider>
