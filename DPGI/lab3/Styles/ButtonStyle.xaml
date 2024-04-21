@@ -151,7 +151,12 @@
 							<Setter Property="BorderThickness" TargetName="border" Value="2"/>
 							<Setter Property="Foreground" Value="{StaticResource Foreground3}"/>
 						</Trigger>
-					</ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="{StaticResource BackgroundElement}"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="2"/>
+                            <Setter Property="Foreground" Value="{StaticResource Foreground2}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -194,7 +199,12 @@
 							<Setter Property="BorderThickness" TargetName="border" Value="2"/>
 							<Setter Property="Foreground" Value="{StaticResource Foreground3}"/>
 						</Trigger>
-					</ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="{StaticResource BackgroundElement}"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="2"/>
+                            <Setter Property="Foreground" Value="{StaticResource Foreground2}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

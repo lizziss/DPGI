@@ -39,8 +39,8 @@ namespace lab3
             }
 
 
-            CmbFrom.SelectedIndex = 0;
-            CmbTo.SelectedIndex = 0;
+            CmbFrom.SelectedIndex = 1;
+            CmbTo.SelectedIndex = 2;
 
 
         }
@@ -124,3 +124,4 @@ namespace lab3
         }
     }
 }
+    
