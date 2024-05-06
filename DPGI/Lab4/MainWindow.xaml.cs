@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Lab4.Data;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,20 @@ namespace Lab4
     /// </summary>
     public partial class MainWindow : Window
     {
+        AdoClients myTable = new AdoClients();
         public MainWindow()
         {
             InitializeComponent();
         }
+        
+        
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            listClients.Focus();
+            listClients.DataContext = myTable.GetAllClients();
+            listClients.SelectedIndex = 0;
+        }
+
+
     }
 }

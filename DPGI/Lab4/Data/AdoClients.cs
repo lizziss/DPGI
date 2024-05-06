@@ -19,7 +19,7 @@ namespace Lab4.Data
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT ID, Name, Phone, Address, Income, Expenses FROM Clients";
+                string query = "SELECT * FROM Clients";
                 SqlCommand command = new SqlCommand(query, connection);
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
 
