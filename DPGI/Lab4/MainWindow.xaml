@@ -9,7 +9,17 @@
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
         >
-    <Grid DataContext="{Binding ElementName=listClients, Path=SelectedItem}" Background="WhiteSmoke">
+    <DockPanel>
+        <ToolBar Height="35" VerticalAlignment="Top" DockPanel.Dock="Top">
+            <Button Click="CreateButton_Click">Create</Button>
+            <Separator />
+            <Button Click="UpdateButton_Click">Update></Button>
+            <Separator />
+            <Button Click="DeleteButton_Click">Delete</Button>
+            <Separator />
+            <Button Click="ClearButton_Click">Clear</Button>
+        </ToolBar>
+        <Grid DataContext="{Binding ElementName=listClients, Path=SelectedItem}" Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
@@ -38,22 +48,23 @@
 
         <!-- TextBlocks and TextBoxes -->
         <TextBlock Grid.Row="1" Margin="5" VerticalAlignment="Center" Foreground="DarkBlue">ID:</TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" IsReadOnly="True" Text="{Binding Path= ID, Mode=OneWay}" Focusable="True" Background="LightYellow"/>
+            <TextBox Name="IdTextBox" Grid.Row="1" Grid.Column="1" IsReadOnly="True" Margin="5"  Text="{Binding Path= ID, Mode=OneWay}"  PreviewTextInput="TxtAmount_PreviewTextInput"  Focusable="True" Background="LightYellow"/>
 
         <TextBlock Grid.Row="2" Margin="5" VerticalAlignment="Center" Foreground="DarkBlue">Name:</TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" IsReadOnly="True" Text="{Binding Path=Name, Mode=OneWay}" Focusable="True" Background="LightYellow"/>
+        <TextBox Name="NameTextBox"  Grid.Row="2" Grid.Column="1" Margin="5"  Text="{Binding Path=Name, Mode=OneWay}" Focusable="True" Background="LightYellow"/>
 
         <TextBlock Grid.Row="3" Margin="5" VerticalAlignment="Center" Foreground="DarkBlue">Phone:</TextBlock>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" IsReadOnly="True" Text="{Binding Path=Phone, Mode=OneWay}" Focusable="True" Background="LightYellow"/>
+            <TextBox  Name="PhoneTextBox"  Grid.Row="3" Grid.Column="1" Margin="5"  Text="{Binding Path=Phone, Mode=OneWay}"  PreviewTextInput="TxtAmount_PreviewTextInput"  Focusable="True" Background="LightYellow"/>
 
         <TextBlock Grid.Row="4" Margin="5" VerticalAlignment="Center" Foreground="DarkBlue">Address:</TextBlock>
-        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" IsReadOnly="True" Text="{Binding Path=Address, Mode=OneWay}" Focusable="True" Background="LightYellow"/>
+        <TextBox Name="AddressTextBox" Grid.Row="4" Grid.Column="1" Margin="5"  Text="{Binding Path=Address, Mode=OneWay}" Focusable="True" Background="LightYellow"/>
 
         <TextBlock Grid.Row="5" Margin="5" VerticalAlignment="Center" Foreground="DarkBlue">Income:</TextBlock>
-        <TextBox Grid.Row="5" Grid.Column="1" Margin="5" IsReadOnly="True" Text="{Binding Path=Income, Mode=OneWay}" Focusable="True" Background="LightYellow"/>
+            <TextBox Name="IncomeTextBox" Grid.Row="5" Grid.Column="1" Margin="5"  Text="{Binding Path=Income, Mode=OneWay}"  PreviewTextInput="TxtAmount_PreviewTextInput"  Focusable="True" Background="LightYellow"/>
 
         <TextBlock Grid.Row="6" Margin="5" VerticalAlignment="Center" Foreground="DarkBlue">Expenses:</TextBlock>
-        <TextBox Grid.Row="6" Grid.Column="1" Margin="5" IsReadOnly="True" Text="{Binding Path=Expenses, Mode=OneWay}" Focusable="True" Background="LightYellow"/>
-    </Grid>
+            <TextBox Name="ExpensesTextBox" Grid.Row="6" Grid.Column="1" Margin="5"  Text="{Binding Path=Expenses, Mode=OneWay}"  PreviewTextInput="TxtAmount_PreviewTextInput"  Focusable="True" Background="LightYellow"/>
+        </Grid>
+    </DockPanel>
 
 </Window>
