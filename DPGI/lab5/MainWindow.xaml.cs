@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,23 @@ namespace lab5
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DBLab5Entities _context;
         public MainWindow()
         {
             InitializeComponent();
+            _context = new DBLab5Entities() ;
+            LoadData(); 
+        }
+
+        private void LoadData()
+        {
+            var clients = _context.Clients.ToList();
+            var companies = _context.Companies.ToList();
+        
+
+            dataGridClients.ItemsSource = clients;
+            dataGridCompanies.ItemsSource = companies;
+           
         }
     }
 }

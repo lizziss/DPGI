@@ -6,7 +6,29 @@
         xmlns:local="clr-namespace:lab5"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <TabControl>
+   
+            <TabItem Header="Clients">
+                <DataGrid x:Name="dataGridClients" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                        <DataGridTextColumn Header="Company_ID" Binding="{Binding Company_ID}"/>
+                        <DataGridTextColumn Header="Revenue" Binding="{Binding Revenue}"/>
+                        <DataGridTextColumn Header="Expenses" Binding="{Binding Expenses}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Companies">
+                <DataGrid x:Name="dataGridCompanies" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Company_ID" Binding="{Binding Company_ID}"/>
+                        <DataGridTextColumn Header="Company_Name" Binding="{Binding Company_Name}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
         
-    </Grid>
+
+    </TabControl>
 </Window>
