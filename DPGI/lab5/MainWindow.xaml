@@ -7,9 +7,65 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <TabControl>
-   
-            <TabItem Header="Clients">
-                <DataGrid x:Name="dataGridClients" AutoGenerateColumns="False">
+
+        <TabItem Header="Clients">
+            <DataGrid x:Name="dataGridClients" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                    <DataGridTextColumn Header="Company_ID" Binding="{Binding Company_ID}"/>
+                    <DataGridTextColumn Header="Revenue" Binding="{Binding Revenue}"/>
+                    <DataGridTextColumn Header="Expenses" Binding="{Binding Expenses}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+        <TabItem Header="Companies">
+            <DataGrid x:Name="dataGridCompanies" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Company_ID" Binding="{Binding Company_ID}"/>
+                    <DataGridTextColumn Header="Company_Name" Binding="{Binding Company_Name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+        <TabItem Header="Search Clients">
+            <StackPanel>
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Target="{Binding ElementName=txtClientID}" Content="ID"/>
+                    <TextBox Name="txtClientID" Grid.Row="0" Grid.Column="1" Width="200" Margin="5" Focusable="True" HorizontalAlignment="Left"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Target="{Binding ElementName=txtClientName}" Content="Name"/>
+                    <TextBox Name="txtClientName" Grid.Row="1" Grid.Column="1" Width="200" Margin="5" Focusable="True" HorizontalAlignment="Left"/>
+
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Target="{Binding ElementName=txtClientPhone}" Content="Phone"/>
+                    <TextBox Name="txtClientPhone" Grid.Row="2" Grid.Column="1" Width="200" Margin="5" Focusable="True" HorizontalAlignment="Left"/>
+
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Target="{Binding ElementName=txtClientCompanyID}" Content="Company ID"/>
+                    <TextBox Name="txtClientCompanyID" Grid.Row="3" Grid.Column="1" Width="200" Margin="5" Focusable="True" HorizontalAlignment="Left"/>
+
+                    <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Target="{Binding ElementName=txtClientRevenue}" Content="Revenue"/>
+                    <TextBox Name="txtClientRevenue" Grid.Row="4" Grid.Column="1" Width="200" Margin="5" Focusable="True" HorizontalAlignment="Left"/>
+
+                    <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Target="{Binding ElementName=txtClientExpenses}" Content="Expenses"/>
+                    <TextBox Name="txtClientExpenses" Grid.Row="5" Grid.Column="1" Width="200" Margin="5" Focusable="True" HorizontalAlignment="Left"/>
+
+                    <Button Grid.Row="6" Grid.ColumnSpan="2" IsDefault="True" Name="btnSearchClients" Content="Search Clients" Width="200" Margin="5" Click="btnSearchClients_Click" HorizontalAlignment="Center"/>
+                </Grid>
+                <DataGrid x:Name="dataGridSearchClients" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
@@ -19,16 +75,56 @@
                         <DataGridTextColumn Header="Expenses" Binding="{Binding Expenses}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-            </TabItem>
-            <TabItem Header="Companies">
-                <DataGrid x:Name="dataGridCompanies" AutoGenerateColumns="False">
+            </StackPanel>
+
+        </TabItem>
+        <TabItem Header="Search Сompanies">
+            <StackPanel>
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="63*"/>
+                        <ColumnDefinition Width="611*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Target="{Binding ElementName=txtCompaniesID}" Content="ID Company"/>
+                    <TextBox Name="txtCompaniesID" Grid.Row="0" Grid.Column="1" Width="200" Margin="5,5,0,5" Focusable="True" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Target="{Binding ElementName=txtCompaniesName}" Content="Name"/>
+                    <TextBox Name="txtCompaniesName" Grid.Row="1" Grid.Column="1" Width="200" Margin="5,5,0,5" Focusable="True" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+
+
+                    <Button Grid.Row="2" Name="btnSearchCompanies" Content="Search Companies" Width="200" Margin="124,5,0,5"  IsDefault="True" Click="btnSearchCompanies_Click" HorizontalAlignment="Left" Grid.Column="2"/>
+                </Grid>
+                <DataGrid x:Name="dataGridSearchCompanies" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Company_ID" Binding="{Binding Company_ID}"/>
-                        <DataGridTextColumn Header="Company_Name" Binding="{Binding Company_Name}"/>
+                        <DataGridTextColumn Header="Company ID" Binding="{Binding Company_ID}"/>
+                        <DataGridTextColumn Header="Comapany Name" Binding="{Binding Company_Name}"/>
+
                     </DataGrid.Columns>
                 </DataGrid>
-            </TabItem>
-        
+            </StackPanel>
+
+        </TabItem>
+
+        <TabItem Header="Join Tables">
+            <DataGrid x:Name="dataGriJoinTable" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Client ID" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="Client Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Client Phone" Binding="{Binding Phone}"/>
+                    <DataGridTextColumn Header="Comapany Name" Binding="{Binding Company_Name}"/>
+                    <DataGridTextColumn Header="Client Revenue" Binding="{Binding Revenue}"/>
+                    <DataGridTextColumn Header="Ckient Expenses" Binding="{Binding Expenses}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
 
     </TabControl>
 </Window>
