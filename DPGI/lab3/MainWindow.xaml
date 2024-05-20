@@ -22,13 +22,21 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="0" Content="Сonversion history" x:Name="BtnHistory" Style="{StaticResource btn_History}" Click="OpenHistory_Click"/>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    
                     <Button x:Name="BtnMinimize" Margin="0 5 5 0" Style="{StaticResource btn_MinimizeWindow}" Click="BtnMinimize_Click"/>
                     <Button x:Name="BtnMaximize" Margin="0 5 5 0" Style="{StaticResource btn_MaximizeWindow}" Click="BtnMaximize_Click"/>
                     <Button x:Name="BtnClose" Margin="0 5 5 0" Style="{StaticResource btn_CloseWindow}" Click="BtnClose_Click"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    
                     <Label Content="CURRENCY CONVERTER" Style="{StaticResource LargeLabel}"/>
                     <Label Target="{Binding ElementName=txtLogin}" >Amount</Label>
                     <TextBox x:Name="TxtAmount"  Style="{StaticResource TextBoxStyle}" PreviewTextInput="TxtAmount_PreviewTextInput" />

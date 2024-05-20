@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBCurrentConverterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ConversionHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConversionDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="ConvertedAmount" Type="float" Nullable="false" />
+          <Property Name="FromCurrencyRateId" Type="int" Nullable="false" />
+          <Property Name="ToCurrencyRateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CurrencyRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ExchangeRate" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Conversio__FromC__38996AB5">
+          <End Role="CurrencyRate" Type="Self.CurrencyRate" Multiplicity="1" />
+          <End Role="ConversionHistory" Type="Self.ConversionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CurrencyRate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConversionHistory">
+              <PropertyRef Name="FromCurrencyRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Conversio__ToCur__398D8EEE">
+          <End Role="CurrencyRate" Type="Self.CurrencyRate" Multiplicity="1" />
+          <End Role="ConversionHistory" Type="Self.ConversionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CurrencyRate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConversionHistory">
+              <PropertyRef Name="ToCurrencyRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBCurrentConverterModelStoreContainer">
+          <EntitySet Name="ConversionHistory" EntityType="Self.ConversionHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CurrencyRate" EntityType="Self.CurrencyRate" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Conversio__FromC__38996AB5" Association="Self.FK__Conversio__FromC__38996AB5">
+            <End Role="CurrencyRate" EntitySet="CurrencyRate" />
+            <End Role="ConversionHistory" EntitySet="ConversionHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Conversio__ToCur__398D8EEE" Association="Self.FK__Conversio__ToCur__398D8EEE">
+            <End Role="CurrencyRate" EntitySet="CurrencyRate" />
+            <End Role="ConversionHistory" EntitySet="ConversionHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBCurrentConverterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ConversionHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConversionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="ConvertedAmount" Type="Double" Nullable="false" />
+          <Property Name="FromCurrencyRateId" Type="Int32" Nullable="false" />
+          <Property Name="ToCurrencyRateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CurrencyRate" Relationship="Self.FK__Conversio__FromC__38996AB5" FromRole="ConversionHistory" ToRole="CurrencyRate" />
+          <NavigationProperty Name="CurrencyRate1" Relationship="Self.FK__Conversio__ToCur__398D8EEE" FromRole="ConversionHistory" ToRole="CurrencyRate" />
+        </EntityType>
+        <EntityType Name="CurrencyRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShortName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExchangeRate" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ConversionHistory" Relationship="Self.FK__Conversio__FromC__38996AB5" FromRole="CurrencyRate" ToRole="ConversionHistory" />
+          <NavigationProperty Name="ConversionHistory1" Relationship="Self.FK__Conversio__ToCur__398D8EEE" FromRole="CurrencyRate" ToRole="ConversionHistory" />
+        </EntityType>
+        <Association Name="FK__Conversio__FromC__38996AB5">
+          <End Role="CurrencyRate" Type="Self.CurrencyRate" Multiplicity="1" />
+          <End Role="ConversionHistory" Type="Self.ConversionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CurrencyRate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConversionHistory">
+              <PropertyRef Name="FromCurrencyRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Conversio__ToCur__398D8EEE">
+          <End Role="CurrencyRate" Type="Self.CurrencyRate" Multiplicity="1" />
+          <End Role="ConversionHistory" Type="Self.ConversionHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CurrencyRate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConversionHistory">
+              <PropertyRef Name="ToCurrencyRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBCurrentConverterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ConversionHistory" EntityType="Self.ConversionHistory" />
+          <EntitySet Name="CurrencyRate" EntityType="Self.CurrencyRate" />
+          <AssociationSet Name="FK__Conversio__FromC__38996AB5" Association="Self.FK__Conversio__FromC__38996AB5">
+            <End Role="CurrencyRate" EntitySet="CurrencyRate" />
+            <End Role="ConversionHistory" EntitySet="ConversionHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Conversio__ToCur__398D8EEE" Association="Self.FK__Conversio__ToCur__398D8EEE">
+            <End Role="CurrencyRate" EntitySet="CurrencyRate" />
+            <End Role="ConversionHistory" EntitySet="ConversionHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBCurrentConverterModelStoreContainer" CdmEntityContainer="DBCurrentConverterEntities">
+          <EntitySetMapping Name="ConversionHistory">
+            <EntityTypeMapping TypeName="DBCurrentConverterModel.ConversionHistory">
+              <MappingFragment StoreEntitySet="ConversionHistory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConversionDate" ColumnName="ConversionDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ConvertedAmount" ColumnName="ConvertedAmount" />
+                <ScalarProperty Name="FromCurrencyRateId" ColumnName="FromCurrencyRateId" />
+                <ScalarProperty Name="ToCurrencyRateId" ColumnName="ToCurrencyRateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CurrencyRate">
+            <EntityTypeMapping TypeName="DBCurrentConverterModel.CurrencyRate">
+              <MappingFragment StoreEntitySet="CurrencyRate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

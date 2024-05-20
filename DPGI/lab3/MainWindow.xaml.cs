@@ -21,26 +21,26 @@ namespace lab3
     /// </summary>
     public partial class MainWindow : Window
     {
-        // Визначення курсів обміну валют (відношення до долара)
-        double[] exchangeRates = { 1, 38.92, 0.92, 0.79, 151.79, 0.9 }; // USD, UAH, EUR, GBP, JPY, CHF
-        string[] fullNameRates = { "Долар", "Гривня", "Євро", "Фунт стерлінгів", "Єна", "Франк" };
-        string[] shortNameRates = { "USD", "UAH", "EUR", "GBP", "JPY", "CHF" };
+        private DBCurrentConverterEntities _context;
         public MainWindow()
         {
             InitializeComponent();
-
+            _context = new DBCurrentConverterEntities();
 
             CmbTo.Items.Add("--Select--");
             CmbFrom.Items.Add("--Select--");
-            for (int i = 0; i < fullNameRates.Length; i++)
+            foreach (var rate in _context.CurrencyRate.ToList())
             {
-                CmbFrom.Items.Add($"{fullNameRates[i]}, {shortNameRates[i]}");
-                CmbTo.Items.Add($"{fullNameRates[i]}, {shortNameRates[i]}");
+                string displayText = $"{rate.FullName}, {rate.ShortName}";
+                CmbFrom.Items.Add(displayText);
+                CmbTo.Items.Add(displayText);
             }
 
 
-            CmbFrom.SelectedIndex = 1;
-            CmbTo.SelectedIndex = 2;
+            CmbFrom.SelectedIndex = 0;
+            CmbTo.SelectedIndex = 0;
+
+
 
 
         }
@@ -85,12 +85,31 @@ namespace lab3
                 return;
             }
 
-            var convertedAmount = double.Parse(TxtAmount.Text.Replace('.', ',')) * (1 / exchangeRates[CmbFrom.SelectedIndex - 1]) * exchangeRates[CmbTo.SelectedIndex - 1];
+            var amount = double.Parse(TxtAmount.Text.Replace('.', ','));
+            var fromRate = _context.CurrencyRate.First(r => r.Id == CmbFrom.SelectedIndex);
+            var toRate = _context.CurrencyRate.First(r => r.Id == CmbTo.SelectedIndex);
+
+            var convertedAmount = amount * (1 / fromRate.ExchangeRate) * toRate.ExchangeRate;
             LbResult.Content = Math.Round(convertedAmount, 4);
+            LbRate.Content = $"1 {fromRate.ShortName} = {Math.Round(convertedAmount / amount, 4)} {toRate.ShortName}";
 
-            LbRate.Content = $"1 {shortNameRates[CmbFrom.SelectedIndex - 1]} = {Math.Round(convertedAmount / double.Parse(TxtAmount.Text.Replace('.', ',')), 4)} {shortNameRates[CmbTo.SelectedIndex - 1]}";
+            var conversion = new ConversionHistory
+            {
+                ConversionDate = DateTime.Now,
+                Amount = amount,
+                ConvertedAmount = Math.Round(convertedAmount, 4),
+                FromCurrencyRateId = fromRate.Id,
+                ToCurrencyRateId = toRate.Id
+            };
 
+            _context.ConversionHistory.Add(conversion);
+            _context.SaveChanges();
+          
         }
+
+        
+
+
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
             TxtAmount.Text = "";
@@ -121,6 +140,12 @@ namespace lab3
         private void TxtAmount_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = new Regex("[^0-9.]+").IsMatch(e.Text);
+        }
+
+        private void OpenHistory_Click(object sender, RoutedEventArgs e)
+        {
+            HistoryWindow historyWindow = new HistoryWindow();
+            historyWindow.Show();
         }
     }
 }
